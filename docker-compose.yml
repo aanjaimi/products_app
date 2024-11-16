@@ -2,42 +2,48 @@
 version: '3.8'
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./backend:/app
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - ./backend:/app
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   env_file:
+  #     - ./backend/.env
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - ./frontend/.env.local
+
+  db:
+    image: postgres
+    container_name: platform_db
+    restart: on-failure
     ports:
-      - "8000:8000"
-    depends_on:
-      - db
-      - redis
+      - "5432:5432"
+    volumes:
+      - platform_data:/var/lib/postgresql/data
     env_file:
       - ./backend/.env
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./frontend/.env.local
-
-  db:
-    image: postgres:15
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7
-    ports:
-      - "6379:6379"
+  # redis:
+  #   image: redis:7
+  #   ports:
+  #     - "6379:6379"
 
 volumes:
-  postgres_data:
+  platform_data:

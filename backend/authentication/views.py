@@ -1,9 +1,5 @@
 import os
 
-import requests
-from django.contrib.auth import authenticate, login
-from django.shortcuts import HttpResponse, redirect
-from django.utils.http import urlencode
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -45,7 +41,4 @@ class LoginAPI(APIView):
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
 
-        response = redirect(os.getenv("FRONTEND_ORIGIN_URL"))
-        response.set_cookie(key="auth_token", value=access_token, httponly=True)
-
-        return response
+        return Response({"access_token": access_token}, status=status.HTTP_200_OK)

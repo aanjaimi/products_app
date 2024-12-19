@@ -2,6 +2,9 @@
 
 A web application inspired by NutriTech Agro, built with modern web technologies to deliver a seamless user experience.
 
+## Figma Design
+[Visit Figma](https://www.figma.com/design/57Bw9QrgXLYPzQTciuzauk/Untitled?node-id=2-120&t=8eutMxKYMoyAoETS-1)
+
 ## 🚀 Live Demo
 [Visit the Application](https://products-app-vert.vercel.app/login)
 

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "django_filters",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -151,3 +155,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Custom user model
+AUTH_USER_MODEL = "authentication.User"

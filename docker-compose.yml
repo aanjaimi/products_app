@@ -31,12 +31,12 @@ services:
 
   db:
     image: postgres
-    container_name: platform_db
+    container_name: products_db
     restart: on-failure
     ports:
       - "5432:5432"
     volumes:
-      - platform_data:/var/lib/postgresql/data
+      - products_data:/var/lib/postgresql/data
     env_file:
       - ./backend/.env
 
@@ -46,4 +46,4 @@ services:
   #     - "6379:6379"
 
 volumes:
-  platform_data:
+  products_data:

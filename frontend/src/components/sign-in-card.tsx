@@ -17,13 +17,13 @@ import { AxiosError } from "axios"
 import { toast } from "react-hot-toast"
 
 const defaultValues = {
-  email: '',
-  password: '',
+	email: '',
+	password: '',
 }
 
 interface SignInFormValues {
-  email: string
-  password: string
+	email: string
+	password: string
 }
 
 export function SignInCard() {
@@ -32,28 +32,29 @@ export function SignInCard() {
 	const router = useRouter()
 
 	const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues,
-    resolver: yupResolver(loginSchema)
-  })
+		defaultValues,
+		resolver: yupResolver(loginSchema)
+	})
 
-  const handleSignIn: SubmitHandler<SignInFormValues> = useCallback((data) => {
-    setIsDisabled(true)
-    JSON.stringify(data)
-    // Call the API to create a new account
-    const { email, password } = data
-    fetcher
-    .post('/auth/login', { email, password })
-    .then((res) => {
+	const handleSignIn: SubmitHandler<SignInFormValues> = useCallback((data) => {
+		setIsDisabled(true)
+		JSON.stringify(data)
+		console.log('sign_in_data: ', data)
+		// Call the API to create a new account
+		const { email, password } = data
+		fetcher
+		.post('/auth/login', { email, password })
+		.then((res) => {
 			const { access_token } = res.data as { access_token: string }
 			localStorage.setItem("access_token", access_token)
-      router.push("/")
-    })
-    .catch((err: AxiosError) => {
+			router.push("/")
+		})
+		.catch((err: AxiosError) => {
 			const { error } = err.response?.data as { error: string }
 			toast.error(error)
-      setIsDisabled(false)
-    })
-  }, [])
+			setIsDisabled(false)
+		})
+	}, [])
 
 	return (
 		<Card className="mx-auto max-w-md">

@@ -49,7 +49,6 @@ export function SignUpCard() {
   const handleSignUp: SubmitHandler<SignUpFormValues> = useCallback((data) => {
     setIsDisabled(true)
     JSON.stringify(data)
-    console.log('sign_up_data: ', data)
     // Call the API to create a new account
     const { email, password } = data
     fetcher

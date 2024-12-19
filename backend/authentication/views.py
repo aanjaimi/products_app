@@ -10,9 +10,6 @@ from .serializers import UserSerializer
 class RegisterAPI(APIView):
     def post(self, request):
         try:
-            # Log the incoming data
-            print('Incoming data:', request.data)
-
             # Ensure we have valid JSON data
             if not request.data:
                 return Response({
@@ -32,8 +29,6 @@ class RegisterAPI(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            # Log the error
-            print('Error:', str(e))
             return Response({
                 'error': 'Registration failed',
                 'details': str(e)
@@ -44,9 +39,6 @@ class LoginAPI(APIView):
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
-
-        print('EMAIL: ', email)
-        print('PASSWORD: ', password)
 
         if email is None or password is None:
             return Response(

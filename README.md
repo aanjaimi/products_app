@@ -1,1 +1,1 @@
-# This project is about creating an educational platform
+# This project is about creating a products application

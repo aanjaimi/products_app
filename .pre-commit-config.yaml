@@ -21,3 +21,4 @@ repos:
     hooks:
     -   id: isort
         exclude: ^.*\b(migrations)\b.*$
+        args: ["--profile=black"]

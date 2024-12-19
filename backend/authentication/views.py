@@ -36,26 +36,16 @@ class LoginAPI(APIView):
         user = User.objects.filter(email=email).first()
 
         if user is None:
-            return Response(
-                {"error": "User not found!"},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+            return Response({"error": "User not found!"}, status=status.HTTP_401_UNAUTHORIZED)
 
         if not user.check_password(password):
-            return Response(
-                {"error": "Incorrect password!"},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+            return Response({"error": "Incorrect password!"}, status=status.HTTP_401_UNAUTHORIZED)
 
         # Generate token
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
 
         response = redirect(os.getenv("FRONTEND_ORIGIN_URL"))
-        response.set_cookie(
-            key="auth_token",
-            value=access_token,
-            httponly=True
-        )
+        response.set_cookie(key="auth_token", value=access_token, httponly=True)
 
         return response

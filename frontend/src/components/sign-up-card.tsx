@@ -61,7 +61,8 @@ export function SignUpCard() {
     })
     .catch((err: AxiosError) => {
       const { email } = err.response?.data as { email: string }
-      toast.error(email)
+      const error = email ? email : "Something went wrong"
+      toast.error(error)
       setIsDisabled(false)
     })
   }, [])
